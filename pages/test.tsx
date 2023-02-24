@@ -1,8 +1,8 @@
+import Image from 'next/image';
 import Head from 'next/head';
+import { useState } from 'react';
 import { Inter } from 'next/font/google';
 import { createClient } from '@supabase/supabase-js';
-
-import BlurBook, { Book } from '@/components/BlurBook';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -10,6 +10,14 @@ const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL || '',
   process.env.SUPABASE_SERVICE_ROLE_KEY || '',
 );
+
+type Book = {
+  id: number;
+  name: string;
+  publisher: string;
+  href: string;
+  imageSrc: string;
+};
 
 export async function getStaticProps() {
   const { data } = await supabaseAdmin.from('books').select('*').order('id');
@@ -37,5 +45,35 @@ export default function Gallery({ books }: { books: Book[]; }) {
         </div>
       </main>
     </>
+  );
+}
+
+function cn(...classes: string[]) {
+  return classes.filter(Boolean).join(' ');
+}
+
+function BlurBook({ book }: { book: Book; }) {
+  const [isLoading, setLoading] = useState(true);
+
+  return (
+    <a href={book.href} className="group">
+      <div className="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+        <Image
+          alt=""
+          src={book.imageSrc}
+          fill
+          style={{ objectFit: 'cover' }}
+          className={cn(
+            'group-hover:opacity-75 duration-700 ease-in-out',
+            isLoading
+              ? 'grayscale blur-2xl scale-110'
+              : 'grayscale-0 blur-0 scale-100',
+          )}
+          onLoadingComplete={() => setLoading(false)}
+        />
+      </div>
+      <h3 className="mt-4 text-sm">{book.name}</h3>
+      <p className="mt-1 text-lg font-medium">{book.publisher}</p>
+    </a>
   );
 }

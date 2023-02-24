@@ -1,7 +1,6 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@next/font': 13.2.1
   '@supabase/supabase-js': ^2.8.0
   '@tailwindcss/aspect-ratio': ^0.4.2
   '@types/node': 18.14.1
@@ -18,7 +17,6 @@ specifiers:
   typescript: 4.9.5
 
 dependencies:
-  '@next/font': 13.2.1
   '@supabase/supabase-js': 2.8.0
   '@types/node': 18.14.1
   '@types/react': 18.0.28
@@ -90,10 +88,6 @@ packages:
     resolution: {integrity: sha512-r0i5rcO6SMAZtqiGarUVMr3k256X0R0j6pEkKg4PxqUW+hG0qgMxRVAJsuoRG5OBFkCOlSfWZJ0mP9fQdCcyNg==}
     dependencies:
       glob: 7.1.7
-    dev: false
-
-  /@next/font/13.2.1:
-    resolution: {integrity: sha512-4sergLt7xp9+mZuKME/xM4tLlHGTcmL7naCq0qCTcAlof6NnttshYgiLOdhSiy0NcI+/yM3BjvdEk++O96UzTg==}
     dev: false
 
   /@next/swc-android-arm-eabi/13.2.1:
